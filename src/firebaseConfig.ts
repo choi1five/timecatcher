@@ -2,8 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
   authDomain: process.env.REACT_APP_authDomain,
@@ -13,12 +11,13 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_appId,
 };
 
-// Initialize Firebase
+const KAKAO_API_KEY = "a6d60ef4da4cd75fd3766da837c3c834";
+const KAKAO_REDIRECT_URL = "http://localhost:3000/kakaoAuth";
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URL}&response_type=code`;
+
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 
-// Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-
-export { auth, firebaseConfig };
+export { auth, firebaseConfig, KAKAO_AUTH_URL };

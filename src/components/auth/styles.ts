@@ -81,6 +81,20 @@ const SubmitBtn = styled.button`
     font-size: 14px;
     color: #ffffff;
   }
+
+  & img {
+    width: 100%;
+  }
+`;
+
+const KakaoBtn = styled.button`
+  margin-top: 20px;
+  width: 304px;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  background-image: url(images/kakaoLogin.png);
 `;
 
 const ToggleAuth = styled.div`
@@ -99,5 +113,6 @@ export {
   AuthInputBox,
   ValidateError,
   SubmitBtn,
+  KakaoBtn,
   ToggleAuth,
 };

@@ -5,6 +5,8 @@ import {
   setPersistence,
   signInWithEmailAndPassword,
   browserSessionPersistence,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { Link } from "react-router-dom";
@@ -16,9 +18,11 @@ import {
   AuthInputBox,
   ValidateError,
   SubmitBtn,
+  KakaoBtn,
   ToggleAuth,
 } from "./styles";
 import { authState } from "../../atoms/atoms";
+
 interface IFormInput {
   email: string;
   password: string;
@@ -48,6 +52,22 @@ export default function SignIn() {
       .catch((error) => {
         alert(error.message);
       });
+  };
+
+  const googleLoginHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    const provider = new GoogleAuthProvider();
+    setPersistence(auth, browserSessionPersistence).then(() => {
+      console.log(auth);
+      return signInWithPopup(auth, provider)
+        .then(() => {
+          navigate("/main");
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    });
   };
 
   return (
@@ -86,6 +106,9 @@ export default function SignIn() {
           </AuthInputBox>
           <SubmitBtn>
             <span>로그인</span>
+          </SubmitBtn>
+          <SubmitBtn type="button" onClick={googleLoginHandler}>
+            <span>구글 로그인</span>
           </SubmitBtn>
         </AuthForm>
         <ToggleAuth>
